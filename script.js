@@ -1,18 +1,18 @@
 const INVITACION = {
-  nombre: 'Pía',
-  subtitulo: 'Mis 15 años',
-  frase: 'Te invito a compartir una noche inolvidable',
-  fechaEvento: '2026-10-14T20:30:00-03:00',
-  fechaTexto: '14 de octubre de 2026 · 20:30 hs',
-  horaTexto: '20:30 hs',
-  lugar: 'Salón a confirmar',
-  direccion: 'Ubicación a confirmar',
-  mapsUrl: '#',
-  whatsappNumero: '5492644101980',
-  whatsappMensaje: 'Hola, Pía, te confirmo mi asistencia.',
-  alias: 'PIA.15.EJEMPLO',
+  nombre: 'Pía y Alejo',
+  subtitulo: 'Te invitamos',
+  frase: 'A compartir una noche especial',
+  fechaEvento: '2026-10-10T21:00:00-03:00',
+  fechaTexto: '10 de octubre de 2026 · 21:00 hs',
+  horaTexto: '21:00 hs',
+  lugar: 'El Rancho',
+  direccion: 'Caucete, San Juan',
+  mapsUrl: 'https://maps.app.goo.gl/zwSQP48DQSfJqVin9',
+  whatsappNumero: '5492644548296',
+  whatsappMensaje: 'Hola Pía y Alejo, confirmo mi asistencia.',
+  alias: 'aranela.09',
   textoRegalo: 'Tu presencia es el mejor regalo, pero si querés hacerme un obsequio, podés usar este alias.',
-  vestimenta: 'Elegante · Colores a elección',
+  vestimenta: 'Formal sport',
   footer: 'Jesús Funes'
 };
 
@@ -32,28 +32,28 @@ function cargarDatos() {
   $('#textoRegalo').textContent = INVITACION.textoRegalo;
   $('#aliasEvento').textContent = INVITACION.alias;
   $('#vestimentaEvento').textContent = INVITACION.vestimenta;
-  document.querySelector('.footer strong').textContent = INVITACION.footer;
+  $('#footerAutor').textContent = INVITACION.footer;
 
-  const fecha = new Date(INVITACION.fechaEvento);
-  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-  $('#mesEventoTexto').textContent = meses[fecha.getMonth()];
-  $('#diaEvento').textContent = fecha.getDate();
-  $('#anioEvento').textContent = fecha.getFullYear();
-  $('#diaSemanaEvento').textContent = dias[fecha.getDay()];
+  const [anio, mes, dia] = INVITACION.fechaEvento.slice(0, 10).split('-').map(Number);
+  const fecha = new Date(Date.UTC(anio, mes - 1, dia));
+  const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
-  const mensaje = encodeURIComponent(INVITACION.whatsappMensaje);
-  $('#btnWhatsApp').href = `https://wa.me/${INVITACION.whatsappNumero}?text=${mensaje}`;
-  $('#btnUbicacion').href = INVITACION.mapsUrl || '#';
+  $('#mesEventoTexto').textContent = meses[mes - 1];
+  $('#diaEvento').textContent = dia;
+  $('#anioEvento').textContent = anio;
+  $('#diaSemanaEvento').textContent = dias[fecha.getUTCDay()];
+  $('#btnWhatsApp').href = `https://wa.me/${INVITACION.whatsappNumero}?text=${encodeURIComponent(INVITACION.whatsappMensaje)}`;
+  $('#btnUbicacion').href = INVITACION.mapsUrl;
 }
 
 function iniciarCuentaRegresiva() {
   const objetivo = new Date(INVITACION.fechaEvento).getTime();
   const mensaje = $('#mensajeCuenta');
+  let intervalo;
 
   function actualizar() {
-    const ahora = Date.now();
-    const diferencia = objetivo - ahora;
+    const diferencia = objetivo - Date.now();
 
     if (diferencia <= 0) {
       $('#dias').textContent = '00';
@@ -61,6 +61,7 @@ function iniciarCuentaRegresiva() {
       $('#minutos').textContent = '00';
       $('#segundos').textContent = '00';
       mensaje.textContent = 'El gran día llegó.';
+      if (intervalo) clearInterval(intervalo);
       return;
     }
 
@@ -77,38 +78,81 @@ function iniciarCuentaRegresiva() {
   }
 
   actualizar();
-  setInterval(actualizar, 1000);
+  intervalo = setInterval(actualizar, 1000);
+}
+
+function copiarConFallback(texto) {
+  const campo = document.createElement('textarea');
+  campo.value = texto;
+  campo.setAttribute('readonly', '');
+  campo.style.position = 'fixed';
+  campo.style.opacity = '0';
+  campo.style.pointerEvents = 'none';
+  document.body.appendChild(campo);
+  campo.focus();
+  campo.select();
+  campo.setSelectionRange(0, campo.value.length);
+
+  let copiado = false;
+  try {
+    copiado = document.execCommand('copy');
+  } catch {
+    copiado = false;
+  } finally {
+    campo.remove();
+  }
+  return copiado;
+}
+
+let temporizadorFeedback;
+
+async function copiarAlias() {
+  let copiado = false;
+
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(INVITACION.alias);
+      copiado = true;
+    } catch {
+      copiado = copiarConFallback(INVITACION.alias);
+    }
+  } else {
+    copiado = copiarConFallback(INVITACION.alias);
+  }
+
+  if (!copiado) {
+    window.prompt('Copiá el alias:', INVITACION.alias);
+    return;
+  }
+
+  const feedback = $('#mensajeCopiado');
+  window.clearTimeout(temporizadorFeedback);
+  feedback.classList.add('show');
+  temporizadorFeedback = window.setTimeout(() => feedback.classList.remove('show'), 1800);
 }
 
 function iniciarBotones() {
   $('#btnAbrir').addEventListener('click', () => {
     $('#invitacion').scrollIntoView({ behavior: 'smooth' });
   });
-
-  $('#btnCopiarAlias').addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(INVITACION.alias);
-      $('#mensajeCopiado').classList.add('show');
-      setTimeout(() => $('#mensajeCopiado').classList.remove('show'), 1800);
-    } catch {
-      alert(`No se pudo copiar el alias. Copialo manualmente: ${INVITACION.alias}`);
-    }
-  });
-
-  $('#btnUbicacion').addEventListener('click', (event) => {
-    if (!INVITACION.mapsUrl || INVITACION.mapsUrl === '#') {
-      event.preventDefault();
-      alert('La ubicación todavía no fue cargada. Después la cambiamos por Google Maps.');
-    }
-  });
+  $('#btnCopiarAlias').addEventListener('click', copiarAlias);
+  $('#btnCopiarAliasLateral').addEventListener('click', copiarAlias);
 }
 
 function iniciarAnimaciones() {
+  if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    $$('.reveal').forEach((elemento) => elemento.classList.add('show'));
+    return;
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add('show');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.12 });
 
   $$('.reveal').forEach((elemento) => observer.observe(elemento));
 }
@@ -116,25 +160,42 @@ function iniciarAnimaciones() {
 function iniciarLightbox() {
   const lightbox = $('#lightbox');
   const lightboxImg = $('#lightboxImg');
+  const botonCerrar = $('#cerrarLightbox');
+  let elementoAnterior = null;
 
-  $$('.zoomable').forEach((img) => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightbox.classList.add('open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    });
-  });
+  function abrir(img) {
+    elementoAnterior = document.activeElement;
+    lightboxImg.src = img.currentSrc || img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+    botonCerrar.focus();
+  }
 
   function cerrar() {
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
     lightboxImg.src = '';
-    document.body.style.overflow = '';
+    lightboxImg.alt = '';
+    if (elementoAnterior instanceof HTMLElement) elementoAnterior.focus();
   }
 
-  $('#cerrarLightbox').addEventListener('click', cerrar);
+  $$('.zoomable').forEach((img) => {
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', `Ampliar: ${img.alt}`);
+    img.addEventListener('click', () => abrir(img));
+    img.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        abrir(img);
+      }
+    });
+  });
+
+  botonCerrar.addEventListener('click', cerrar);
   lightbox.addEventListener('click', (event) => {
     if (event.target === lightbox) cerrar();
   });

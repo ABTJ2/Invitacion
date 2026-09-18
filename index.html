@@ -3,132 +3,173 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f8f3f6" />
-  <title>Invitación · Pía</title>
-  <meta name="description" content="Invitación digital responsive para eventos." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#21445B" />
+  <title>Invitación · Pía y Alejo</title>
+  <meta name="description" content="Invitación digital de Pía y Alejo para el 10 de octubre de 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&family=Playfair+Display:wght@500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main>
-    <section class="hero" id="inicio">
-      <div class="hero__overlay"></div>
-      <div class="hero__content reveal">
-        <p class="eyebrow" id="heroEyebrow">Mis 15 años</p>
-        <h1 id="nombrePrincipal">Pía</h1>
-        <p class="hero__phrase" id="frasePrincipal">Te invito a compartir una noche inolvidable</p>
-        <p class="hero__date" id="fechaTexto">14 de octubre de 2026 · 20:30 hs</p>
-        <button class="btn btn--light" id="btnAbrir" type="button">Ver invitación</button>
+    <section class="hero" id="inicio" aria-labelledby="nombrePrincipal">
+      <picture class="hero__media">
+        <source media="(min-width: 760px)" srcset="img/portada-hero.jpg" type="image/jpeg" />
+        <img class="hero__image" src="img/portada-hero.jpg" alt="Foto de Pía y Alejo" fetchpriority="high" />
+      </picture>
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="hero__frame" aria-hidden="true"></div>
+      <div class="hero__content reveal show">
+        <p class="eyebrow eyebrow--light" id="heroEyebrow">Te invitamos</p>
+        <h1 id="nombrePrincipal">Pía y Alejo</h1>
+        <p class="hero__phrase" id="frasePrincipal">A compartir una noche especial</p>
+        <p class="hero__date" id="fechaTexto">10 de octubre de 2026 · 21:00 hs</p>
+        <button class="btn btn--glass" id="btnAbrir" type="button">
+          <span>Ver invitación</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5" /></svg>
+        </button>
       </div>
     </section>
 
-    <section class="content" id="invitacion">
-      <section class="section section--compact reveal">
-        <div class="portrait-card">
-          <img class="portrait-card__image zoomable" src="img/foto2.jpg" alt="Foto principal de Pía" />
+    <div class="content" id="invitacion">
+      <section class="section save-date reveal" aria-labelledby="reservaTitulo">
+        <div class="save-date__visual">
+          <span class="save-date__outline" aria-hidden="true"></span>
+          <figure class="save-date__photo">
+            <img class="zoomable" src="img/foto6.jpg" alt="Foto formal de Pía y Alejo vestidos de negro" />
+          </figure>
+          <span class="save-date__number" aria-hidden="true">10</span>
         </div>
-        <p class="eyebrow eyebrow--dark">Reservá este día</p>
-        <h2 class="script-name" id="nombreFirma">Pía</h2>
-        <div class="divider"><span></span><i></i><span></span></div>
-      </section>
-
-      <section class="section reveal">
-        <div class="date-card">
-          <p class="date-card__month" id="mesEventoTexto">Octubre</p>
-          <div class="date-card__day" id="diaEvento">14</div>
-          <p class="date-card__year" id="anioEvento">2026</p>
-          <p class="date-card__week" id="diaSemanaEvento">Miércoles</p>
+        <div class="save-date__copy">
+          <p class="eyebrow" id="reservaTitulo">Reservá esta fecha</p>
+          <h2 class="script-name" id="nombreFirma">Pía y Alejo</h2>
+          <div class="ornament" aria-hidden="true"><span></span><i></i><span></span></div>
         </div>
       </section>
 
-      <section class="section reveal">
-        <p class="eyebrow eyebrow--dark">Faltan</p>
-        <div class="countdown" id="countdown">
+      <section class="section date-section reveal" aria-label="Fecha del evento">
+        <div class="date-display">
+          <div class="date-display__top">
+            <span class="date-display__line" aria-hidden="true"></span>
+            <span id="diaSemanaEvento">Sábado</span>
+            <span class="date-display__line" aria-hidden="true"></span>
+          </div>
+          <div class="date-display__center">
+            <p class="date-display__day" id="diaEvento">10</p>
+            <p class="date-display__month"><span>de</span> <strong id="mesEventoTexto">Octubre</strong></p>
+            <p class="date-display__year"><span>de</span> <strong id="anioEvento">2026</strong></p>
+          </div>
+          <p class="date-display__caption">Una noche para celebrar juntos</p>
+        </div>
+      </section>
+
+      <section class="section countdown-section reveal" aria-labelledby="cuentaTitulo">
+        <p class="eyebrow eyebrow--light" id="cuentaTitulo">Faltan</p>
+        <div class="countdown" id="countdown" aria-live="polite">
           <div class="countdown__item"><strong id="dias">00</strong><span>Días</span></div>
           <div class="countdown__item"><strong id="horas">00</strong><span>Horas</span></div>
-          <div class="countdown__item"><strong id="minutos">00</strong><span>Minutos</span></div>
-          <div class="countdown__item"><strong id="segundos">00</strong><span>Segundos</span></div>
+          <div class="countdown__item"><strong id="minutos">00</strong><span>Min</span></div>
+          <div class="countdown__item"><strong id="segundos">00</strong><span>Seg</span></div>
         </div>
-        <p class="countdown__message" id="mensajeCuenta"></p>
+        <p class="countdown__message" id="mensajeCuenta">Cada vez falta menos.</p>
       </section>
 
-      <section class="section reveal">
-        <div class="feature-photo">
-          <img class="zoomable" src="img/foto1.jpg" alt="Foto destacada de la celebración" />
+      <section class="section reception reveal" aria-labelledby="recepcionTitulo">
+        <div class="reception__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
         </div>
+        <p class="eyebrow" id="recepcionTitulo">Recepción</p>
+        <p class="reception__time" id="horaEvento">21:00 hs</p>
+        <div class="reception__rule" aria-hidden="true"></div>
+        <h2 id="salonEvento">El Rancho</h2>
+        <p class="address" id="direccionEvento">Caucete, San Juan</p>
+        <a class="btn btn--primary" id="btnUbicacion" href="https://maps.app.goo.gl/zwSQP48DQSfJqVin9" target="_blank" rel="noopener">
+          <span>Cómo llegar</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5" /></svg>
+        </a>
       </section>
 
-      <section class="section reveal">
-        <div class="info-block">
-          <p class="eyebrow eyebrow--dark">Recepción</p>
-          <h2 class="section-title" id="horaEvento">20:30 hs</h2>
-          <p class="muted">Rogamos puntualidad</p>
-          <div class="divider divider--small"><span></span><i></i><span></span></div>
-          <h3 id="salonEvento">Salón a confirmar</h3>
-          <p class="address" id="direccionEvento">Ubicación a confirmar</p>
-          <a class="btn" id="btnUbicacion" href="#" target="_blank" rel="noopener">Ver ubicación</a>
+      <section class="section attendance reveal" aria-labelledby="asistenciaTitulo">
+        <div class="attendance__copy">
+          <p class="eyebrow eyebrow--light">Asistencia</p>
+          <h2 id="asistenciaTitulo">¿Nos acompañás?</h2>
+          <p>Tu respuesta nos ayuda a preparar cada detalle.</p>
         </div>
+        <a class="btn btn--ice" id="btnWhatsApp" href="#" target="_blank" rel="noopener">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.55 0 .24 5.31.24 11.84c0 2.09.55 4.13 1.59 5.93L.14 24l6.38-1.67a11.83 11.83 0 0 0 5.56 1.41h.01c6.53 0 11.84-5.31 11.84-11.84 0-3.17-1.23-6.15-3.43-8.4ZM12.09 21.7h-.01a9.82 9.82 0 0 1-5-1.37l-.36-.21-3.79.99 1.01-3.69-.23-.38a9.83 9.83 0 1 1 8.38 4.66Zm5.39-7.37c-.29-.15-1.73-.86-2-.96-.27-.1-.46-.15-.66.15-.19.29-.75.96-.92 1.16-.17.19-.34.22-.63.07-1.7-.85-2.82-1.51-3.95-3.42-.3-.51.3-.47.87-1.55.1-.2.05-.37-.03-.52-.07-.15-.66-1.59-.9-2.18-.24-.57-.48-.49-.66-.5h-.56c-.2 0-.52.07-.8.37-.27.29-1.04 1.02-1.04 2.49s1.07 2.89 1.21 3.09c.15.19 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.73-.71 1.97-1.4.24-.69.24-1.28.17-1.4-.07-.12-.27-.2-.56-.34Z" /></svg>
+          <span>Confirmar asistencia</span>
+        </a>
       </section>
 
-      <section class="section reveal">
-        <div class="info-block">
-          <p class="eyebrow eyebrow--dark">Asistencia</p>
-          <h2 class="section-title">Confirmar asistencia</h2>
-          <p class="muted">Tu respuesta nos ayuda a prepararlo todo mejor.</p>
-          <a class="btn" id="btnWhatsApp" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
-        </div>
-      </section>
-
-      <section class="section reveal">
-        <div class="info-block">
-          <p class="eyebrow eyebrow--dark">Regalo</p>
-          <h2 class="section-title">Opciones de regalo</h2>
-          <p class="normal-text" id="textoRegalo">Tu presencia es el mejor regalo, pero si querés hacerme un obsequio, podés usar este alias.</p>
-          <div class="alias-box">
+      <section class="section gift reveal" aria-labelledby="regaloTitulo">
+        <p class="eyebrow" id="regaloTitulo">Regalo</p>
+        <p class="normal-text" id="textoRegalo">Tu presencia es el mejor regalo, pero si querés hacerme un obsequio, podés usar este alias.</p>
+        <div class="alias-box">
+          <div>
             <span>Alias</span>
-            <strong id="aliasEvento">PIA.15.EJEMPLO</strong>
+            <strong id="aliasEvento">aranela.09</strong>
           </div>
-          <button class="btn" id="btnCopiarAlias" type="button">Copiar alias</button>
-          <small class="copy-feedback" id="mensajeCopiado">Alias copiado</small>
+          <button class="alias-copy" id="btnCopiarAliasLateral" type="button" aria-label="Copiar alias">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" /></svg>
+          </button>
         </div>
+        <button class="btn btn--secondary" id="btnCopiarAlias" type="button">Copiar alias</button>
+        <small class="copy-feedback" id="mensajeCopiado" role="status" aria-live="polite">Alias copiado</small>
       </section>
 
-      <section class="section reveal">
-        <div class="info-block">
-          <p class="eyebrow eyebrow--dark">Vestimenta</p>
-          <h2 class="section-title">Código de vestimenta</h2>
-          <p class="dresscode" id="vestimentaEvento">Elegante</p>
-        </div>
+      <section class="section dress reveal" aria-labelledby="vestimentaTitulo">
+        <p class="eyebrow eyebrow--light" id="vestimentaTitulo">Código de vestimenta</p>
+        <p class="dress__name" id="vestimentaEvento">Formal sport</p>
+        <div class="dress__lines" aria-hidden="true"><span></span><i></i><span></span></div>
       </section>
 
-      <section class="section reveal">
-        <p class="eyebrow eyebrow--dark">Momentos</p>
-        <h2 class="section-title">Galería</h2>
-        <p class="muted muted--gallery">Tocá cualquier foto para verla más grande.</p>
+      <section class="section gallery-section reveal" aria-labelledby="galeriaTitulo">
+        <div class="gallery-section__heading">
+          <p class="eyebrow">Galería</p>
+          <h2 id="galeriaTitulo">Pía y Alejo</h2>
+          <p class="gallery-section__intro">Momentos para recordar</p>
+        </div>
         <div class="gallery">
-          <figure class="gallery__item gallery__item--wide"><img class="zoomable" src="img/foto3.jpg" alt="Galería 1" /></figure>
-          <figure class="gallery__item"><img class="zoomable" src="img/foto4.jpg" alt="Galería 2" /></figure>
-          <figure class="gallery__item"><img class="zoomable" src="img/foto5.jpg" alt="Galería 3" /></figure>
-          <figure class="gallery__item gallery__item--wide"><img class="zoomable" src="img/foto2.jpg" alt="Galería 4" /></figure>
+          <figure class="gallery__item">
+            <img class="zoomable" src="img/foto3.jpg" alt="Pía y Alejo sonriendo" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img class="zoomable" src="img/foto5.jpg" alt="Pía y Alejo juntos" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img class="zoomable" src="img/foto2.jpg" alt="Pía y Alejo en un momento compartido" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img class="zoomable" src="img/foto6.jpg" alt="Pía y Alejo vestidos de negro" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img class="zoomable" src="img/foto4.jpg" alt="Foto de Pía" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img class="zoomable" src="img/foto1.jpg" alt="Foto de Alejo" loading="lazy" />
+          </figure>
+          <figure class="gallery__item">
+            <img class="zoomable" src="img/foto7.jpg" alt="Foto de Alejo" loading="lazy" />
+          </figure>
         </div>
       </section>
 
-      <section class="section reveal">
-        <p class="closing-text">Te espero para celebrar esta noche tan especial.</p>
-        <p class="signature" id="firmaFinal">Pía</p>
+      <section class="section closing reveal" aria-label="Mensaje final">
+        <span class="closing__ornament" aria-hidden="true"></span>
+        <p class="closing__text">Los esperamos para compartir este momento tan especial.</p>
+        <p class="signature" id="firmaFinal">Pía y Alejo</p>
       </section>
-    </section>
+    </div>
   </main>
 
   <footer class="footer">
-    <p>Desarrollado por <strong>Jesús Funes</strong></p>
+    <p>Desarrollado por <strong id="footerAutor">Jesús Funes</strong></p>
   </footer>
 
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lightbox__close" id="cerrarLightbox" type="button" aria-label="Cerrar imagen">×</button>
-    <img id="lightboxImg" src="" alt="Vista ampliada" />
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada de fotografía" aria-hidden="true">
+    <button class="lightbox__close" id="cerrarLightbox" type="button" aria-label="Cerrar imagen">&times;</button>
+    <img id="lightboxImg" src="" alt="" />
   </div>
 
   <script src="script.js"></script>
