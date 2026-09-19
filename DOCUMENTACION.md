@@ -19,7 +19,7 @@ La estetica buscada es elegante, familiar y festiva. No debe parecer una invitac
 - Lugar: El Rancho.
 - Direccion: Caucete, San Juan.
 - Google Maps: https://maps.app.goo.gl/zwSQP48DQSfJqVin9
-- Vestimenta: Formal sport.
+- Vestimenta: Elegante Sport.
 - Alias: aranela.09.
 - Numero de WhatsApp: 5492644548296.
 - Mensaje de WhatsApp: Hola Pía y Alejo, confirmo mi asistencia.
@@ -88,13 +88,13 @@ El proyecto usa HTML, CSS y JavaScript puro. No tiene framework ni proceso de bu
 
 ### Vestimenta
 
-- Texto actual: `Formal sport`.
+- Texto actual: `Elegante Sport`.
 - Fondo azul profundo con cuadricula sutil.
 - Se separa visualmente de la galeria mediante un margen superior.
 
 ### Galeria
 
-- Contiene 7 fotografias.
+- Contiene 8 fotografias.
 - Todas las tarjetas tienen proporcion vertical `3:4`.
 - Las fotos se muestran completas con `object-fit: contain`.
 - En movil se muestran 2 columnas.
@@ -118,6 +118,7 @@ El proyecto usa HTML, CSS y JavaScript puro. No tiene framework ni proceso de bu
 - `img/foto5.jpg`: 1152 x 1536 px.
 - `img/foto6.jpg`: 1152 x 1536 px.
 - `img/foto7.jpg`: 1152 x 1536 px.
+- `img/foto8.jpeg`: foto adicional de la galería.
 
 No cambiar la galeria a `object-fit: cover`: eso vuelve a cortar las fotos. La tarjeta debe conservar `aspect-ratio: 3 / 4` y `object-fit: contain`.
 
@@ -186,7 +187,7 @@ Para cambiar datos del evento, editar solamente `INVITACION` en `script.js` siem
 
 Para cambiar fotos de galeria:
 
-- Mantener los nombres `foto1.jpg` a `foto7.jpg`, o actualizar los `src` correspondientes en `index.html`.
+- Mantener los nombres de las fotos o actualizar los `src` correspondientes en `index.html`.
 - Preferir fotos verticales.
 - No quitar la clase `zoomable`.
 - No reemplazar `contain` por `cover` si se quiere evitar recortes.
@@ -202,7 +203,7 @@ Para mantener la estetica:
 ## 11. Verificaciones realizadas
 
 - Se verifico la galeria en 320, 360, 390, 768, 1024 y 1440 px durante las iteraciones visuales.
-- Se verifico que las 7 fotos mantengan formato uniforme.
+- Se verifico que las 8 fotos mantengan formato uniforme.
 - Se verifico que no exista desbordamiento horizontal.
 - Se verifico el funcionamiento del lightbox.
 - `node --check script.js` se mantiene correcto.

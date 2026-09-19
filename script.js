@@ -12,7 +12,7 @@ const INVITACION = {
   whatsappMensaje: 'Hola Pía y Alejo, confirmo mi asistencia.',
   alias: 'aranela.09',
   textoRegalo: 'Tu presencia es el mejor regalo, pero si querés hacerme un obsequio, podés usar este alias.',
-  vestimenta: 'Formal sport',
+  vestimenta: 'Elegante Sport',
   footer: 'Jesús Funes'
 };
 
